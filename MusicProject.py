@@ -13,7 +13,7 @@ SPOTIFY_SCOPE                       = "playlist-modify-private playlist-modify-p
 
 ACCURACY_NORMAL                     = 0.80                                                  # Accuracy for comparing strings       
 ACCURACY_PRECISE                    = 0.95                                                  # Accuracy for comparing strings
-SEARCH_ANALYSIS_LIMIT               = 11                                                    # Number of song results to search for in every search request
+SEARCH_ANALYSIS_LIMIT               = 12                                                    # Number of song results to search for in every search request
 MAX_NUMBER_OF_TRACKS                = 9999                                                  # Max number of tracks to search for (Spotify Limit)
 
 search_track_IDs                    = []  # Track IDs that were found successfully
