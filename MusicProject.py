@@ -1,4 +1,6 @@
-import spotipy 
+import sys
+
+import spotipy
 import os
 import difflib
 import csv
@@ -11,7 +13,7 @@ SPOTIFY_SCOPE                       = "playlist-modify-private playlist-modify-p
 
 ACCURACY_NORMAL                     = 0.80                                                  # Accuracy for comparing strings       
 ACCURACY_PRECISE                    = 0.95                                                  # Accuracy for comparing strings
-SEARCH_ANALYSIS_LIMIT               = 3                                                     # Number of song results to search for in every search request
+SEARCH_ANALYSIS_LIMIT               = 11                                                    # Number of song results to search for in every search request
 MAX_NUMBER_OF_TRACKS                = 9999                                                  # Max number of tracks to search for (Spotify Limit)
 
 search_track_IDs                    = []  # Track IDs that were found successfully
@@ -294,9 +296,11 @@ for i in range(len(mp3_list)):
             writer.writerow([status, mp3_list[i], search_result["tracks"]["items"][index]["artists"][0]["name"].lower() + " " + search_result["tracks"]["items"][index]["name"].lower(), round(compare_ratios[index],2)])
 
     # Print progress
-    if len(mp3_list) != 0:
+    if len(mp3_list) == 0:
+        print("div 0 Warning")
+    else:
         progress = round((i + 1) / len(mp3_list) * 100)
-        print(f"--> Search progress: {progress}%", end="\r")
+        print(f"--> Search progress: {progress}%")
 
 
 # Add statistics to csv file
