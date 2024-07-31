@@ -51,7 +51,8 @@ def spotify_authentication(client_id, client_secret, scope):
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
                                                   client_secret=client_secret,
                                                   redirect_uri="http://localhost",
-                                                  scope=scope))
+                                                  scope=scope,
+                                                  cache_handler=None))
     return sp
 
 def compare_strings(string1, string2, compare_ratio=0.85):
@@ -293,8 +294,10 @@ for i in range(len(mp3_list)):
             writer.writerow([status, mp3_list[i], search_result["tracks"]["items"][index]["artists"][0]["name"].lower() + " " + search_result["tracks"]["items"][index]["name"].lower(), round(compare_ratios[index],2)])
 
     # Print progress
-    progress = round((i + 1) / len(mp3_list) * 100)
-    print(f"--> Search progress: {progress}%", end="\r")
+    if len(mp3_list) != 0:
+        progress = round((i + 1) / len(mp3_list) * 100)
+        print(f"--> Search progress: {progress}%", end="\r")
+
 
 # Add statistics to csv file
 if GENERATE_LOG_FILE:
