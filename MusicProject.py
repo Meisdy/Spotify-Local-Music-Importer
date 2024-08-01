@@ -13,7 +13,7 @@ SPOTIFY_SCOPE                       = "playlist-modify-private playlist-modify-p
 
 ACCURACY_NORMAL                     = 0.80                                                  # Accuracy for comparing strings       
 ACCURACY_PRECISE                    = 0.95                                                  # Accuracy for comparing strings
-SEARCH_ANALYSIS_LIMIT               = 11                                                    # Number of song results to search for in every search request
+SEARCH_ANALYSIS_LIMIT               = 12                                                    # Number of song results to search for in every search request
 MAX_NUMBER_OF_TRACKS                = 9999                                                  # Max number of tracks to search for (Spotify Limit)
 
 search_track_IDs                    = []  # Track IDs that were found successfully
@@ -257,7 +257,8 @@ for i in range(len(mp3_list)):
     index = compare_ratios.index(max(compare_ratios))
 
     # If index is below chosen ration, ask user whether he still wants to add the found track
-    if DOUBLECHECK_SEARCH and compare_ratios[index] < COMPARE_RATIO_DIFFLIB:
+    if DOUBLECHECK_SEARCH and (0.8 < compare_ratios[index] < COMPARE_RATIO_DIFFLIB):
+
         user_input = input(f"--> The track number {i+1} was found with a similarity ratio of {round(compare_ratios[index],2)}.\n--> Search input:\t{mp3_list[i]}\n--> Found track:\t{search_result['tracks']['items'][index]['artists'][0]['name'].lower()} {search_result['tracks']['items'][index]['name'].lower()}\nDo you still want to add this track? (y/n):")
         
         if user_input == "y":
